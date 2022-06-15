@@ -1,4 +1,19 @@
-//general fuctions
+
+//get Data and set data on local storage
+async function setGetJSON() {
+    const response = await fetch("data.json");
+    const json = await response.json();
+    const local= JSON.stringify(json);
+
+    
+    if (localStorage.getItem("rawData") === null) {
+        localStorage.setItem('rawData', local);
+        console.log("asdf");
+    }
+}
+setGetJSON();
+
+//Limpiar modal
 var clear_m=function(){
     let form =document.getElementById('insert_js_form');
     let table=document.getElementById('instert_js');
@@ -9,12 +24,7 @@ var clear_m=function(){
     }
 };
 
-var preconditions=function(arr){
-    arr.forEach(e =>{
-        if(!e){return false}
-    });
-    return true;
-};
+
 //claeses
 const backup=document.querySelector('#cell-SSNSlAbiQOSAJhHqBq8c-30 path');
 const version=document.querySelector('#cell-SSNSlAbiQOSAJhHqBq8c-92 path');
@@ -45,9 +55,10 @@ const dba=document.querySelector('#cell-SSNSlAbiQOSAJhHqBq8c-9 path');
 var title=document.getElementById('infoLabel');
 //modalsimple text
 let div =document.getElementById('instert_plainText');
-//info clases
-let info = JSON.parse(localStorage.getItem('rawData')).clases;
-
+//info
+let all_info=JSON.parse(localStorage.getItem('rawData'));
+let info = all_info.clases;
+//console.log(localStorage.getItem('rawData'));   
 clases=[
     {backup,info:info["info_bakup"]}
     ,{version,info:info["info_version"]}
@@ -130,7 +141,8 @@ const modal = new bootstrap.Modal('#info');
     });
 })();
 
-let info_e = JSON.parse(localStorage.getItem('rawData')).eventos;
+let info_e = all_info.eventos;
+
 //eventos
 
 var check_event = function(evento,intento){
@@ -246,7 +258,7 @@ var g_btn=function(callback,data){
 
 
 // Dinamicas 
-let info_d = JSON.parse(localStorage.getItem('rawData')).dinamicas;
+let info_d = all_info.dinamicas;
 var form =document.getElementById('insert_js_form'); 
 function create_form(id,nomb,cond,pos_cond,callback){
     let dvl=document.getElementById(id);
@@ -254,6 +266,7 @@ function create_form(id,nomb,cond,pos_cond,callback){
         if(cond.value || cond.last_try){
             callback();
             info_d[pos_cond].value=true;
+            
         }else{
             div.children[0].innerHTML="Implicación necesaria no satísfecha";
             info_d[pos_cond].value=false;
@@ -306,6 +319,7 @@ var call_designs=function(){
                 info.info_definition.hojas[element.index].valores.push(element.f.value);
             });
             info_d.desings=true;
+            localStorage.setItem('rawData',JSON.stringify(all_info));
         }else{
             alert("Campos faltantes no se guardó");
             info_d.desings=false;
@@ -391,7 +405,7 @@ var call_develops=function(){
             info.info_table.hojas[0].valores.push("Some foreing key");
             info.info_table.hojas[1].valores.push("Some priamry key");
             info.info_cell.hojas[0].valores.push("Some value added while coding");
-
+            
         }else{
             info_d.develops.value=false;
             alert("Campos faltantes");

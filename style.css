@@ -9,9 +9,9 @@ svg path{
     z-index: 99;
 }
 
-#infoLabel{
+/*#infoLabel{
     text-transform: capitalize;
-}
+}*/
 #clear{
     position:absolute;
     width: 70px;

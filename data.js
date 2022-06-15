@@ -1,4 +1,4 @@
-info={
+/*info={
     clases:{
         info_bakup:{
             nombre:"backup",
@@ -196,8 +196,9 @@ info={
         updates2:{value:false},
         grants:{value:false},
         removes:{value:false}
-    }
+    },
+    info_right_click:{}
 };
 
 localStorage.setItem('rawData', JSON.stringify(info));
-
+*/
