@@ -1,4 +1,4 @@
-/*info={
+info={
     clases:{
         info_bakup:{
             nombre:"backup",
@@ -174,11 +174,13 @@
     eventos:{
         user_arises:{
             probabilidad: 100,
-            last_try:false        
+            last_try:false,
+            count:0        
         },
         request_r_database: {
             probabilidad:100,
-            last_try:false      
+            last_try:false,
+            count:0     
         }
     },
 
@@ -200,5 +202,4 @@
     info_right_click:{}
 };
 
-localStorage.setItem('rawData', JSON.stringify(info));
-*/
+localStorage.setItem('rdd', JSON.stringify(info));

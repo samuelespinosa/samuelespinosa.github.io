@@ -141,28 +141,33 @@ const modal = new bootstrap.Modal('#info');
     });
 })();
 
+//simulación
+var PD = require("probability-distributions");
+
+let count_user_arises = 0;
+let count_interested_arises = 0;
+
+var probs=PD.rnorm(100, 2, 1);
+setInterval(function() {
+    count_user_arises=0;
+    count_interested_arises=0;
+}, 5000);
 let info_e = all_info.eventos;
 
 //eventos
 
-var check_event = function(evento,intento){
-    if(intento<=evento.probabilidad){
-        evento.last_try=true;
-        return true;
-    }
-    evento.last_try=false;
-    return false;
-};
 function create_event(id,nomb,callback){
     let dvl=document.getElementById(id);
     dvl.addEventListener('dblclick',(e)=>{
+        count_user_arises+=1;
+        count_interested_arises+=1;
         callback();
         modal.show();
         title.innerHTML=nomb;
     });
     dvl.addEventListener('contextmenu', (e)=>{
         e.preventDefault();
-        div.children[0].innerHTML="Info event";
+        div.children[0].innerHTML="1 mes 10s";
         title.innerHTML='Acerca de '+nomb;
         modal.show();
         return false;  
@@ -171,23 +176,29 @@ function create_event(id,nomb,callback){
 }
 //user arises
 var call_user_arises=function(){
-    let prob =Math.floor(Math.random() * 100) + 1;
-    if(check_event(info_e.user_arises,prob)){
-        div.children[0].innerHTML="Ha entrado un nuevo usuario ( probabilidad de "+info_e.user_arises.probabilidad+"% )";
+    
+    let probability=Math.abs(probs[count_user_arises]);
+    console.log(probability);
+    if(probability>=1){
+        div.children[0].innerHTML="Ha entrado un nuevo usuario ";
+        
     }else{
-        div.children[0].innerHTML="No ha entrado un nuevo usuario ( probabilidad de "+(100-info_e.user_arises.probabilidad)+"% )";
+        div.children[0].innerHTML="No ha entrado un nuevo usuario ";
     }
 };  
 create_event("cell-SSNSlAbiQOSAJhHqBq8c-209","User arises",call_user_arises);
 
 //interested arises
 var call_interested_arises=function(){
-    let prob =Math.floor(Math.random() * 100) + 1;
+    
+    let probability=Math.abs(probs[count_interested_arises]);
+    console.log(probability);
     //llenar modal
-    if(check_event(info_e.request_r_database,prob)){
-        div.children[0].innerHTML="Se requiere una base de datos relacional ( probabilidad de :"+info_e.request_r_database.probabilidad+"% )";
+    if(probability>=1){
+        div.children[0].innerHTML="Se requiere una base de datos relacional ";
+
     }else{
-        div.children[0].innerHTML="No se requiere una base de datos relacional ( probabilidad: "+(100-info_e.request_r_database.probabilidad)+"% )";
+        div.children[0].innerHTML="No se requiere una base de datos relacional ";
     }
 };
 create_event("cell-SSNSlAbiQOSAJhHqBq8c-104","Interested request database",call_interested_arises);
@@ -252,6 +263,7 @@ var g_btn=function(callback,data){
     console.log(datos);
     btn.addEventListener('click',(e)=>{
         callback(datos);
+        localStorage.setItem('rawData',JSON.stringify(all_info));
     });
     return btn;
 };
@@ -355,6 +367,7 @@ var call_aproves=function(){
         info.info_dba.hojas[1].valores=["Telecomunicatios","Public safety and security","coumunications and media"];
         clear_m();
         modal.hide();
+        localStorage.setItem('rawData',JSON.stringify(all_info));
     });
     btn2.addEventListener('click',(e)=>{
         info_d.aproves=false;
@@ -405,6 +418,7 @@ var call_develops=function(){
             info.info_table.hojas[0].valores.push("Some foreing key");
             info.info_table.hojas[1].valores.push("Some priamry key");
             info.info_cell.hojas[0].valores.push("Some value added while coding");
+            localStorage.setItem('rawData',JSON.stringify(all_info));
             
         }else{
             info_d.develops.value=false;
@@ -435,6 +449,7 @@ var call_controls=function(){
             info.info_version.hojas[1].valores.push(d.getHours()+":"+d.getMinutes());
             info.info_bakup.hojas[0].valores.push("file.txt");
             info.info_dba.hojas[1].valores.push("Administration and managment");
+            localStorage.setItem('rawData',JSON.stringify(all_info));
         }else{
             info_d["controls"]=false;
             alert("Campos faltantes");
