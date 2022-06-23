@@ -167,7 +167,7 @@ function create_event(id,nomb,callback){
     });
     dvl.addEventListener('contextmenu', (e)=>{
         e.preventDefault();
-        div.children[0].innerHTML="1 mes 10s";
+        div.children[0].innerHTML="1 mes 1  0s";
         title.innerHTML='Acerca de '+nomb;
         modal.show();
         return false;  
