@@ -159,7 +159,7 @@ let info_e = all_info.eventos;
 function create_event(id,nomb,callback){
     let dvl=document.getElementById(id);
     dvl.addEventListener('dblclick',(e)=>{
-        count_user_arises+=1;
+        count_user_arises+=1;   
         count_interested_arises+=1;
         callback();
         modal.show();
@@ -181,9 +181,11 @@ var call_user_arises=function(){
     console.log(probability);
     if(probability>=1){
         div.children[0].innerHTML="Ha entrado un nuevo usuario ";
+        info_e.user_arises.last_try=true;
         
     }else{
         div.children[0].innerHTML="No ha entrado un nuevo usuario ";
+        info_e.user_arises.last_try=false;
     }
 };  
 create_event("cell-SSNSlAbiQOSAJhHqBq8c-209","User arises",call_user_arises);
@@ -196,9 +198,11 @@ var call_interested_arises=function(){
     //llenar modal
     if(probability>=1){
         div.children[0].innerHTML="Se requiere una base de datos relacional ";
+        info_e.request_r_database.last_try=true;
 
     }else{
         div.children[0].innerHTML="No se requiere una base de datos relacional ";
+        info_e.request_r_database.last_try=false;
     }
 };
 create_event("cell-SSNSlAbiQOSAJhHqBq8c-104","Interested request database",call_interested_arises);
