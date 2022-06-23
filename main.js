@@ -147,7 +147,7 @@ var PD = require("probability-distributions");
 let count_user_arises = 0;
 let count_interested_arises = 0;
 
-var probs=PD.rnorm(100, 2, 1);
+var probs=PD.rnorm(100, 4, 1);
 setInterval(function() {
     count_user_arises=0;
     count_interested_arises=0;
