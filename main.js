@@ -162,6 +162,7 @@ function create_event(id,nomb,callback){
         count_user_arises+=1;   
         count_interested_arises+=1;
         callback();
+        localStorage.setItem('rawData',JSON.stringify(all_info));
         modal.show();
         title.innerHTML=nomb;
     });
