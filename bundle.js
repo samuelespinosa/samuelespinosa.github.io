@@ -282,6 +282,8 @@ function create_form(id,nomb,cond,pos_cond,callback){
     let dvl=document.getElementById(id);
     dvl.addEventListener('dblclick',(e)=>{
         if(cond.value || cond.last_try){
+            cond.last_try=false;
+            localStorage.setItem('rawData',JSON.stringify(all_info));
             callback();
             info_d[pos_cond].value=true;
             
