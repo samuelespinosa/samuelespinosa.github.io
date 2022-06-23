@@ -151,7 +151,7 @@ var probs=PD.rnorm(100, 2, 1);
 setInterval(function() {
     count_user_arises=0;
     count_interested_arises=0;
-}, 5000);
+}, 10000);
 let info_e = all_info.eventos;
 
 //eventos
@@ -167,7 +167,7 @@ function create_event(id,nomb,callback){
     });
     dvl.addEventListener('contextmenu', (e)=>{
         e.preventDefault();
-        div.children[0].innerHTML="1 mes 1  0s";
+        div.children[0].innerHTML="1 mes 10s";
         title.innerHTML='Acerca de '+nomb;
         modal.show();
         return false;  
