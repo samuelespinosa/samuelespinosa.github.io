@@ -1,1 +1,1 @@
-# proyecto_requisitos
+executable preconceptual diagram of relational database
