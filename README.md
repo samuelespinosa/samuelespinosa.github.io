@@ -1,1 +1,1 @@
-### executable preconceptual diagram of relational database
+### Executable preconceptual diagram of relational database
